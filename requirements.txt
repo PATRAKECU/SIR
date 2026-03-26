@@ -1,0 +1,12 @@
+Flask==2.3.3
+Flask-WTF==1.2.1
+WTForms==3.1.2
+email-validator==2.1.0.post1
+
+numpy==1.26.4
+matplotlib==3.8.2
+plotly==5.18.0
+
+weasyprint==68.1
+cairocffi==1.6.1
+Pyphen==0.14.0

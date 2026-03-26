@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>Vista previa del reporte SIR</h1>
+    <h3>Análisis #{{ analysis.id }}</h3>
+
+    <div class="mt-4">
+        <h4>Parámetros del análisis</h4>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Población inicial:</strong> {{ analysis.population }}</li>
+            <li class="list-group-item"><strong>Tasa de contagio (β):</strong> {{ analysis.beta }}</li>
+            <li class="list-group-item"><strong>Tasa de recuperación (γ):</strong> {{ analysis.gamma }}</li>
+            <li class="list-group-item"><strong>Días simulados:</strong> {{ analysis.days }}</li>
+            <li class="list-group-item"><strong>Fecha de creación:</strong> {{ analysis.created_at }}</li>
+        </ul>
+    </div>
+
+    <div class="mt-4">
+        <h4>Modelo Matemático</h4>
+        <pre>
+            dS/dt = -βSI
+            dI/dt = βSI - γI
+            dR/dt = γI
+        </pre>
+    </div>
+
+    <div class="mt-4">
+        <h4>Gráfico de propagación</h4>
+        <img src="{{ url_for('static', filename=plot_path) }}"
+            alt="SIR Plot"
+            class="img-fluid"
+            style="max-width:600px;">
+    </div>
+
+    <div class="mt-4">
+        <h4>Datos numéricos</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>S</th>
+                    <th>I</th>
+                    <th>R</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(analysis.days + 1) %}
+                <tr>
+                    <td>{{ i }}</td>
+                    <td>{{ S[i] | round(2) }}</td>
+                    <td>{{ I[i] | round(2) }}</td>
+                    <td>{{ R[i] | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('report_pdf', analysis_id=analysis.id) }}" 
+       class="btn btn-success mt-3" target="_blank">
+        Descargar PDF
+    </a>
+
+    <a href="{{ url_for('analysis_detail', analysis_id=analysis.id) }}" 
+       class="btn btn-secondary mt-3">
+        Volver al análisis
+    </a>
+
+</div>
+
+{% endblock %}

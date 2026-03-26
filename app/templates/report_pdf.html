@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Reporte SIR – Análisis {{ analysis.id }}</title>
+    <link rel="stylesheet" href="{{ base_url }}static/css/pdf_style.css">
+</head>
+
+<body>
+
+    <h1>Reporte del Modelo SIR</h1>
+    <h2>Análisis #{{ analysis.id }}</h2>
+
+    <div class="section">
+        <div><span class="label">Población inicial:</span> {{ analysis.population }}</div>
+        <div><span class="label">Tasa de contagio (β):</span> {{ analysis.beta }}</div>
+        <div><span class="label">Tasa de recuperación (γ):</span> {{ analysis.gamma }}</div>
+        <div><span class="label">Días simulados:</span> {{ analysis.days }}</div>
+        <div><span class="label">Fecha de creación:</span> {{ analysis.created_at }}</div>
+    </div>
+
+    <div class="section">
+        <h3>Modelo Matemático</h3>
+        <div class="formula">
+            dS/dt = -βSI<br>
+            dI/dt = βSI - γI<br>
+            dR/dt = γI
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Gráfico de Propagación</h3>
+        <img src="{{ base_url }}{{ plot_path }}" alt="SIR Plot" style="width:100%; max-width:600px;">
+    </div>
+
+    <div class="section">
+        <h3>Datos Numéricos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>S</th>
+                    <th>I</th>
+                    <th>R</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(analysis.days + 1) %}
+                <tr>
+                    <td>{{ i }}</td>
+                    <td>{{ S[i] | round(2) }}</td>
+                    <td>{{ I[i] | round(2) }}</td>
+                    <td>{{ R[i] | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        Sistema de Pronóstico SIR – Generado automáticamente
+    </div>
+
+</body>
+</html>

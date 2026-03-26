@@ -1,0 +1,101 @@
+/* ======== ESTILO GENERAL ======== */
+body {
+    font-family: "Georgia", serif;
+    margin: 3em;
+    line-height: 1.55;
+    color: #1a1a1a; /* negro suave */
+    background-color: #ffffff;
+}
+
+/* ======== TITULOS ======== */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 0.4em;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 2.2em;
+    color: #0f1e4d; /* azul académico profundo */
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #1e3a8a; /* azul profesional */
+}
+
+h3 {
+    font-size: 1.25em;
+    color: #1e3a8a;
+    margin-top: 1.8em;
+}
+
+/* ======== SECCIONES ======== */
+.section {
+    margin-bottom: 2.2em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/* ======== ETIQUETAS ======== */
+.label {
+    font-weight: bold;
+    color: #0f1e4d;
+    display: inline-block;
+    width: 240px;
+    font-size: 1.05em;
+}
+
+/* ======== FORMULAS ======== */
+.formula {
+    font-family: "Courier New", monospace;
+    font-size: 1.05em;
+    background-color: #f5f7ff; /* azul muy suave */
+    border-left: 4px solid #1e3a8a;
+    padding: 0.8em 1.2em;
+    border-radius: 4px;
+    margin: 1em 0;
+    color: #0f172a;
+}
+
+/* ======== TABLAS ======== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+    font-size: 0.95em;
+}
+
+th, td {
+    border: 1px solid #cbd5e1;
+    padding: 0.5em 0.7em;
+    text-align: center;
+}
+
+th {
+    background-color: #e8edff;
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+/* ======== IMAGENES ======== */
+img {
+    display: block;
+    margin: 1.2em auto;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #d4d4d4;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+/* ======== PIE DE PÁGINA ======== */
+.footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 3em;
+    border-top: 1px solid #d4d4d4;
+    padding-top: 1em;
+}

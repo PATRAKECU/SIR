@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Historial de Análisis SIR</h2>
+
+    {% if rows %}
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Población</th>
+                <th>β</th>
+                <th>γ</th>
+                <th>Días</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.population }}</td>
+                <td>{{ row.beta }}</td>
+                <td>{{ row.gamma }}</td>
+                <td>{{ row.days }}</td>
+                <td>{{ row.created_at }}</td>
+                <td>
+                    <a href="{{ url_for('analysis_detail', analysis_id=row.id) }}" 
+                       class="btn btn-sm btn-outline-primary">
+                        Ver
+                    </a>
+
+                    <a href="{{ url_for('edit_analysis', analysis_id=row.id) }}" 
+                       class="btn btn-sm btn-outline-primary">
+                        Editar
+                    </a>
+
+                    <a href="{{ url_for('delete_analysis', analysis_id=row.id) }}" 
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('¿Estás seguro de eliminar este análisis?');">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <p class="mt-4">Aún no tienes análisis guardados.</p>
+    {% endif %}
+
+    <!-- Botón para volver al índice -->
+    <div class="mt-4">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            Volver al inicio
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

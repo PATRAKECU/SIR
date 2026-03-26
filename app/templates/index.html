@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if session.user_id %}
+<div class="alert alert-info text-center py-2 mb-4">
+    Bienvenido, <strong>{{ session.name }}</strong>.
+</div>
+{% endif %}
+
+<div class="container mt-4">
+    <h1 class="mb-3">Sistema de Pronóstico de Propagación de Enfermedades Infecciosas – Modelo SIR</h1>
+
+    <p>          
+        Este sistema permite simular la propagación de enfermedades infecciosas
+        utilizando el modelo epidemiológico SIR (Susceptible – Infectado – Recuperado).
+    </p>
+
+    <h3>Modelo SIR</h3>
+    <p>
+        El modelo SIR describe la dinámica de transmisión mediante el siguiente sistema
+        de ecuaciones diferenciales:
+    </p>
+
+    <pre>
+        dS/dt = -βSI
+        dI/dt = βSI - γI
+        dR/dt = γI
+    </pre>
+
+    <p>
+        Donde:
+        <ul>
+            <li><strong>S</strong>: población susceptible</li>
+            <li><strong>I</strong>: población infectada</li>
+            <li><strong>R</strong>: población recuperada</li>
+            <li><strong>β</strong>: tasa de contagio</li>
+            <li><strong>γ</strong>: tasa de recuperación</li>
+        </ul>
+    </p>
+
+    <div class="mt-4">
+        <a href="{{ url_for('create_analysis') }}" class="btn btn-primary me-2">
+            Crear nuevo análisis
+        </a>
+
+        <a href="{{ url_for('history') }}" class="btn btn-outline-secondary">
+            Ver historial de análisis
+        </a>
+    </div>
+</div>
+{% endblock %}

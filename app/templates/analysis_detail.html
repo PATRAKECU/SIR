@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Análisis SIR #{{ analysis.id }}</h2>
+
+    <h3 class="mt-4">Modelo Matemático</h3>
+    <p>El modelo SIR se define mediante el siguiente sistema de ecuaciones diferenciales:</p>
+
+    <pre>
+        dS/dt = -βSI
+        dI/dt = βSI - γI
+        dR/dt = γI
+    </pre>
+
+    <p>
+        Donde:
+        <ul>
+            <li><strong>S</strong>: población susceptible</li>
+            <li><strong>I</strong>: población infectada</li>
+            <li><strong>R</strong>: población recuperada</li>
+            <li><strong>β</strong>: tasa de contagio</li>
+            <li><strong>γ</strong>: tasa de recuperación</li>
+        </ul>
+    </p>
+
+    <h3 class="mt-4">Parámetros del análisis</h3>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Población inicial:</strong> {{ analysis.population }}</li>
+        <li class="list-group-item"><strong>Tasa de contagio (β):</strong> {{ analysis.beta }}</li>
+        <li class="list-group-item"><strong>Tasa de recuperación (γ):</strong> {{ analysis.gamma }}</li>
+        <li class="list-group-item"><strong>Días simulados:</strong> {{ analysis.days }}</li>
+        <li class="list-group-item"><strong>Fecha de creación:</strong> {{ analysis.created_at }}</li>
+    </ul>
+
+    <h3 class="mt-4">Gráfico de propagación</h3>
+    <div>{{ plot_html|safe }}</div>
+
+    <h3 class="mt-4">Datos numéricos</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Día</th>
+                <th>S</th>
+                <th>I</th>
+                <th>R</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(analysis.days + 1) %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ sir_data.S[i] | round(2) }}</td>
+                <td>{{ sir_data.I[i] | round(2) }}</td>
+                <td>{{ sir_data.R[i] | round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('report_preview', analysis_id=analysis.id) }}" class="btn btn-primary mt-3">
+        Generar reporte
+    </a>
+
+    <a href="{{ url_for('history') }}" class="btn btn-secondary mt-3">
+        Ir al historial
+    </a>
+
+</div>
+
+{% endblock %}
