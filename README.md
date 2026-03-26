@@ -98,6 +98,8 @@ El sistema se resuelve numéricamente para obtener las curvas epidemiológicas q
 
 ## Cómo Ejecutar
 
+Se recomienda usar la versión Python 3.11
+
 1. Clonar el repositorio.  
 2. Crear un entorno virtual e instalar dependencias:
     pip install -r requirements.txt
