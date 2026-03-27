@@ -31,31 +31,16 @@
     <div class="section">
         <h3>Gráfico de Propagación</h3>
         <img src="{{ base_url }}{{ plot_path }}" alt="SIR Plot" style="width:100%; max-width:600px;">
-    </div>
+    </div> 
 
     <div class="section">
-        <h3>Datos Numéricos</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Día</th>
-                    <th>S</th>
-                    <th>I</th>
-                    <th>R</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in range(analysis.days + 1) %}
-                <tr>
-                    <td>{{ i }}</td>
-                    <td>{{ S[i] | round(2) }}</td>
-                    <td>{{ I[i] | round(2) }}</td>
-                    <td>{{ R[i] | round(2) }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <h3>Indicadores Epidemiológicos</h3>
+        <div><span class="label">Número reproductivo básico (R₀):</span> {{ R0 | round(3) }}</div>
+        <div><span class="label">Día del pico de infectados:</span> {{ peak_day }}</div>
+        <div><span class="label">Máximo de infectados (I(t)):</span> {{ peak_value | round(2) }}</div>
+        <div><span class="label">Duración aproximada del brote:</span> {{ duration }} días</div>
+        <div><span class="label">Porcentaje final de recuperados:</span> {{ final_recovered_pct | round(2) }}%</div>
+    </div>       
 
     <div class="footer">
         Sistema de Pronóstico SIR – Generado automáticamente

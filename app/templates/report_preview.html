@@ -36,28 +36,25 @@
     </div>
 
     <div class="mt-4">
-        <h4>Datos numéricos</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Día</th>
-                    <th>S</th>
-                    <th>I</th>
-                    <th>R</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in range(analysis.days + 1) %}
-                <tr>
-                    <td>{{ i }}</td>
-                    <td>{{ S[i] | round(2) }}</td>
-                    <td>{{ I[i] | round(2) }}</td>
-                    <td>{{ R[i] | round(2) }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <h4>Indicadores epidemiológicos</h4>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <strong>Número reproductivo básico (R₀):</strong> {{ R0 | round(3) }}
+            </li>
+            <li class="list-group-item">
+                <strong>Día del pico de infectados:</strong> {{ peak_day }}
+            </li>
+            <li class="list-group-item">
+                <strong>Máximo de infectados (I(t)):</strong> {{ peak_value | round(2) }}
+            </li>
+            <li class="list-group-item">
+                <strong>Duración aproximada del brote:</strong> {{ duration }} días
+            </li>
+            <li class="list-group-item">
+                <strong>Porcentaje final de recuperados:</strong> {{ final_recovered_pct | round(2) }}%
+            </li>
+        </ul>
+    </div>        
 
     <a href="{{ url_for('report_pdf', analysis_id=analysis.id) }}" 
        class="btn btn-success mt-3" target="_blank">

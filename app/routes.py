@@ -10,6 +10,7 @@ import logging
 from weasyprint import HTML
 from datetime import datetime
 import os
+import numpy as np
 
 
 # Debug configuration for user information
@@ -179,18 +180,26 @@ def analysis_detail(analysis_id):
         days=analysis["days"]
     )
 
-    # Preparar datos para tabla
-    sir_data = {
-        "S": S,
-        "I": I,
-        "R": R
-    }
+    # Cálculo de métricas epidemiológicas
+    R0 = analysis["beta"] / analysis["gamma"]
+    peak_day = int(np.argmax(I))
+    peak_value = float(max(I))
+    final_recovered_pct = (R[-1] / analysis["population"]) * 100
+
+    # Duración aproximada del brote (I cae por debajo de 1)
+    threshold = 1
+    duration = next((i for i, val in enumerate(I[::-1]) if val > threshold), 0)
+    duration = len(I) - duration
 
     return render_template(
         "analysis_detail.html",
         analysis=analysis,
         plot_html=plot_html,
-        sir_data=sir_data
+        R0=R0,
+        peak_day=peak_day,
+        peak_value=peak_value,
+        duration=duration,
+        final_recovered_pct=final_recovered_pct
     )
 
 
@@ -279,13 +288,29 @@ def report_preview(analysis_id):
         days=analysis["days"]
     )
 
+    # ================================
+    # Cálculo de métricas epidemiológicas
+    # ================================
+
+    R0 = analysis["beta"] / analysis["gamma"]
+    peak_day = int(np.argmax(I))
+    peak_value = float(max(I))
+    final_recovered_pct = (R[-1] / analysis["population"]) * 100
+
+    # Duración aproximada del brote (I cae por debajo de 1)
+    threshold = 1
+    duration = next((i for i, val in enumerate(I[::-1]) if val > threshold), 0)
+    duration = len(I) - duration
+
     return render_template(
         "report_preview.html",
         analysis=analysis,
         plot_path=relative_path,
-        S=S,
-        I=I,
-        R=R
+        R0=R0,
+        peak_day=peak_day,
+        peak_value=peak_value,
+        duration=duration,
+        final_recovered_pct=final_recovered_pct
     )
 
 
@@ -322,15 +347,29 @@ def report_pdf(analysis_id):
     rel_path = os.path.relpath(absolute_path, start=project_root).replace(os.path.sep, '/')
     base_url = f'file:///{project_root.replace(os.path.sep, "/")}/'
 
+    # ================================
+    # Cálculo de métricas epidemiológicas
+    # ================================
+    R0 = analysis["beta"] / analysis["gamma"]
+    peak_day = int(np.argmax(I))
+    peak_value = float(max(I))
+    final_recovered_pct = (R[-1] / analysis["population"]) * 100
+
+    threshold = 1
+    duration = next((i for i, val in enumerate(I[::-1]) if val > threshold), 0)
+    duration = len(I) - duration
+
     # Renderizar HTML del reporte
     html = render_template(
         "report_pdf.html",
         analysis=analysis,
         plot_path=rel_path,
         base_url=base_url,
-        S=S,
-        I=I,
-        R=R
+        R0=R0,
+        peak_day=peak_day,
+        peak_value=peak_value,
+        duration=duration,
+        final_recovered_pct=final_recovered_pct
     )
 
     # Generar PDF

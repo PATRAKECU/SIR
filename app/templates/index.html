@@ -13,7 +13,8 @@
 
     <p>          
         Este sistema permite simular la propagación de enfermedades infecciosas
-        utilizando el modelo epidemiológico SIR (Susceptible – Infectado – Recuperado).
+        utilizando el modelo epidemiológico SIR (Susceptible – Infectado – Recuperado),
+        desarrollado por Kermack y McKendrick (Kermack & McKendrick, 1927).
     </p>
 
     <h3>Modelo SIR</h3>
@@ -38,6 +39,67 @@
             <li><strong>γ</strong>: tasa de recuperación</li>
         </ul>
     </p>
+
+    <h3>Parámetros epidemiológicos derivados</h3>
+    <p>
+        Además del comportamiento general del modelo SIR, el sistema calcula indicadores
+        epidemiológicos clave que permiten interpretar la dinámica del brote con mayor precisión.
+        Estos parámetros son ampliamente utilizados en epidemiología matemática para evaluar
+        la transmisibilidad, magnitud y duración de una epidemia (Hethcote, 2000).
+    </p>
+
+    <ul>
+        <li>
+            <strong>Número reproductivo básico (R₀):</strong>
+            Representa el número promedio de contagios que genera un individuo infectado en una
+            población completamente susceptible. Se calcula como <em>R₀ = β / γ</em>.
+            Es uno de los parámetros fundamentales en epidemiología, ya que determina si un brote
+            crecerá o desaparecerá (Anderson & May, 1991).
+        </li>
+
+        <li>
+            <strong>Día del pico de infectados:</strong>
+            Corresponde al momento en el que la cantidad de individuos infectados alcanza su valor máximo.
+            Este punto es crítico para la planificación sanitaria, pues indica cuándo la demanda sobre
+            el sistema de salud será mayor (Brauer, Castillo-Chavez & Feng, 2019).
+        </li>
+
+        <li>
+            <strong>Máximo de infectados (I(t)):</strong>
+            Indica la magnitud del brote en su punto más crítico. Un valor elevado implica mayor riesgo
+            de saturación hospitalaria y mayor necesidad de intervenciones de control (Keeling & Rohani, 2008).
+        </li>
+
+        <li>
+            <strong>Duración aproximada del brote:</strong>
+            Tiempo estimado hasta que la cantidad de infectados desciende por debajo de un umbral mínimo.
+            Este valor permite evaluar la persistencia temporal de la transmisión y la efectividad de las
+            medidas de mitigación (Diekmann, Heesterbeek & Britton, 2013).
+        </li>
+
+        <li>
+            <strong>Porcentaje final de recuperados:</strong>
+            Proporción de la población que ha superado la infección al final de la simulación.
+            En el modelo SIR clásico, este valor también representa la fracción de la población que
+            adquirió inmunidad tras el brote, un concepto conocido como “tamaño final de la epidemia”
+            (Kermack & McKendrick, 1927).
+        </li>
+    </ul>
+
+    <p>
+        Estos indicadores permiten comprender no solo la evolución temporal del brote, sino también su
+        impacto potencial en la población, facilitando la interpretación del modelo y la toma de decisiones.
+    </p>
+
+    <h4>Referencias</h4>
+    <ul>
+        <li>Anderson, R. M., & May, R. M. (1991). <em>Infectious Diseases of Humans: Dynamics and Control</em>. Oxford University Press.</li>
+        <li>Brauer, F., Castillo-Chavez, C., & Feng, Z. (2019). <em>Mathematical Models in Epidemiology</em>. Springer.</li>
+        <li>Diekmann, O., Heesterbeek, H., & Britton, T. (2013). <em>Mathematical Tools for Understanding Infectious Disease Dynamics</em>. Princeton University Press.</li>
+        <li>Hethcote, H. W. (2000). The Mathematics of Infectious Diseases. <em>SIAM Review</em>, 42(4), 599–653.</li>
+        <li>Keeling, M. J., & Rohani, P. (2008). <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</li>
+        <li>Kermack, W. O., & McKendrick, A. G. (1927). A Contribution to the Mathematical Theory of Epidemics. <em>Proceedings of the Royal Society A</em>.</li>
+    </ul>
 
     <div class="mt-4">
         <a href="{{ url_for('create_analysis') }}" class="btn btn-primary me-2">
