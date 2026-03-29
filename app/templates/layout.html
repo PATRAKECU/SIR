@@ -41,11 +41,23 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav ms-auto">
                 {% if session.user_id %}
-                <li class="nav-item">
-                    <a class="btn btn-outline-light ms-2" href="{{ url_for('logout') }}">
-                        Cerrar sesión
-                    </a>
-                </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-light" href="{{ url_for('create_analysis') }}">
+                            Nuevo análisis
+                        </a>
+                    </li>
+
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-light" href="{{ url_for('history') }}">
+                            Historial
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light ms-2" href="{{ url_for('logout') }}">
+                            Cerrar sesión
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

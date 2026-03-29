@@ -22,15 +22,3 @@ CREATE TABLE IF NOT EXISTS analysis (
     created_at TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
--- ===========================================
--- REPORTS TABLE
--- Stores metadata for generated PDF reports
--- ===========================================
-CREATE TABLE IF NOT EXISTS reports (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    analysis_id INTEGER NOT NULL,
-    created_at TEXT NOT NULL,
-    file_path TEXT NOT NULL,
-    FOREIGN KEY (analysis_id) REFERENCES analysis(id)
-);
